@@ -5,7 +5,7 @@ import { ToggleTheme } from '@/components/layouts/toggle-theme';
 export function SiteFooter() {
   return (
     <footer className='border-t'>
-      <div className='container flex items-center justify-between py-5'>
+      <div className='container flex h-14 items-center justify-between'>
         <div className='flex items-center gap-2'>
           <Icons.logo className='h-5 w-5' />
           <p className='text-sm'>
