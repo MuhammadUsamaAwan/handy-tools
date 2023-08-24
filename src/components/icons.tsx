@@ -1,4 +1,17 @@
-import { Check, ChevronDown, ChevronRight, Circle, Laptop, Menu, Moon, Search, Sun, Wrench, X } from 'lucide-react';
+import {
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Circle,
+  Laptop,
+  Menu,
+  Moon,
+  Search,
+  Sun,
+  Upload,
+  Wrench,
+  X,
+} from 'lucide-react';
 
 export const Icons = {
   logo: Wrench,
@@ -12,4 +25,5 @@ export const Icons = {
   sun: Sun,
   moon: Moon,
   system: Laptop,
+  upload: Upload,
 };

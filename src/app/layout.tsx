@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={cn('flex flex-col font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <SiteHeader />
-          <main className='flex-1'>{children}</main>
+          <main className='container flex-1 py-10'>{children}</main>
           <SiteFooter />
         </ThemeProvider>
       </body>
