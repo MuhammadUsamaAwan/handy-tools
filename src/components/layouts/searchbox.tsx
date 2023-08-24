@@ -85,7 +85,7 @@ export function SearchBox() {
             No match found.
           </CommandEmpty>
           {data?.map(item => (
-            <CommandItem key={item.href} onSelect={() => handleSelect(() => router.push(`/product/${item.href}`))}>
+            <CommandItem key={item.href} onSelect={() => handleSelect(() => router.push(item.href))}>
               {item.name}
             </CommandItem>
           ))}
