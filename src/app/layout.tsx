@@ -5,7 +5,8 @@ import type { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { SiteHeader } from '@/components/layouts/site-header';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: {
@@ -36,9 +37,11 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={cn('font-sans antialiased', fontSans.variable)}>
+      <body className={cn('flex flex-col font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          {children}
+          <SiteHeader />
+          <main className='flex-1'>{children}</main>
+          <footer>footer</footer>
         </ThemeProvider>
       </body>
     </html>
