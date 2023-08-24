@@ -3,6 +3,7 @@ import {
   ChevronDown,
   ChevronRight,
   Circle,
+  Download,
   Laptop,
   Menu,
   Moon,
@@ -26,4 +27,5 @@ export const Icons = {
   moon: Moon,
   system: Laptop,
   upload: Upload,
+  download: Download,
 };

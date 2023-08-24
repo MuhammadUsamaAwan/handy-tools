@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
 
-interface Props extends DropzoneProps {
+interface DropzoneCardProps extends DropzoneProps {
   title: string;
   description: string;
 }
 
-export function DropzoneCard({ title, description, ...props }: Props) {
+export function DropzoneCard({ title, description, ...props }: DropzoneCardProps) {
   return (
     <Dropzone {...props}>
       {({ getRootProps, getInputProps }) => (

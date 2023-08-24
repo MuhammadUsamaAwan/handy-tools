@@ -1,22 +1,25 @@
 'use client';
 
-import { DropzoneCard } from '@/components/DropzoneCard';
+import { useState } from 'react';
+
+import { images } from '@/lib/acceptTypes';
+import { DropzoneCard } from '@/components/dropzone-card';
+import { FileItem } from '@/components/file-item';
 
 export default function CompressImages() {
+  const [files, setFiles] = useState<File[]>([]);
+
   return (
     <div>
       <DropzoneCard
-        onDrop={f => console.log(f)}
-        accept={{
-          'image/png': ['.png'],
-          'image/jpeg': ['.jpg', '.jpeg', '.jpe', '.jif', '.jfif'],
-          'image/webp': ['.webp'],
-          'image/gif': ['.gif'],
-          'image/avif': ['.avif'],
-        }}
+        onDrop={acceptedFiles => setFiles(prev => [...prev, ...acceptedFiles])}
+        accept={images}
         title='Compress Images'
         description='Click to upload or drag and drop images here to compress.'
       />
+      <div className='mt-6 space-y-3'>
+        {files?.map((file, index) => <FileItem key={index} name={file.name} size={file.size} />)}
+      </div>
     </div>
   );
 }
