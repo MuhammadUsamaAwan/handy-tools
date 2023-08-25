@@ -3,7 +3,7 @@ import type { APIResponse } from '@/types';
 import sharp from 'sharp';
 import { ZodError } from 'zod';
 
-import { getImageCompressedOptions } from '@/lib/getImageCompressedOptions';
+import { getImageCompressedOptions } from '@/lib/imageOptions';
 import { getImageType } from '@/lib/utils';
 
 export async function POST(request: NextRequest) {
@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
     const isCompressed = compressedBuffer.length < buffer.length;
     const data: APIResponse = {
       data: isCompressed
-        ? `data:image/jpeg;base64,${compressedBuffer.toString('base64')}`
-        : `data:image/jpeg;base64,${buffer.toString('base64')}`,
+        ? `data:${file.type};base64,${compressedBuffer.toString('base64')}`
+        : `data:${file.type};base64,${buffer.toString('base64')}`,
       size: isCompressed ? compressedBuffer.length : buffer.length,
     };
     return NextResponse.json(data);

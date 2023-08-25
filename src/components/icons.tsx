@@ -9,6 +9,7 @@ import {
   Menu,
   Moon,
   Search,
+  Settings,
   Sun,
   Upload,
   Wrench,
@@ -30,4 +31,5 @@ export const Icons = {
   upload: Upload,
   download: Download,
   loading: Loader2,
+  settings: Settings,
 };

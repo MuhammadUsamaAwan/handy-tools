@@ -9,9 +9,10 @@ import { Icons } from '@/components/icons';
 interface DropzoneCardProps extends DropzoneProps {
   title: string;
   description: string;
+  onSettingsClick: () => void;
 }
 
-export function DropzoneCard({ title, description, ...props }: DropzoneCardProps) {
+export function DropzoneCard({ title, description, onSettingsClick, ...props }: DropzoneCardProps) {
   return (
     <Dropzone {...props}>
       {({ getRootProps, getInputProps }) => (
@@ -19,7 +20,20 @@ export function DropzoneCard({ title, description, ...props }: DropzoneCardProps
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             <CardHeader>
-              <CardTitle className='text-center text-2xl'>{title}</CardTitle>
+              <CardTitle className='flex items-center justify-center text-center text-2xl'>
+                {title}
+                <Button
+                  size='icon'
+                  variant='outline'
+                  className='ml-2'
+                  onClick={e => {
+                    e.stopPropagation();
+                    onSettingsClick();
+                  }}
+                >
+                  <Icons.settings className='h-4 w-4' />
+                </Button>
+              </CardTitle>
               <CardDescription className='text-center'>{description}</CardDescription>
             </CardHeader>
             <CardFooter>
