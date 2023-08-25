@@ -6,6 +6,7 @@ import { siteConfig } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { SiteFooter } from '@/components/layouts/site-footer';
 import { SiteHeader } from '@/components/layouts/site-header';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -41,10 +42,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang='en' suppressHydrationWarning>
       <body className={cn('flex flex-col font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <SiteHeader />
-          <main className='container flex-1 py-10'>{children}</main>
-          <SiteFooter />
-          <Toaster />
+          <TooltipProvider delayDuration={250}>
+            <SiteHeader />
+            <main className='container flex-1 py-10'>{children}</main>
+            <SiteFooter />
+            <Toaster />
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

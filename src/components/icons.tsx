@@ -3,6 +3,7 @@ import {
   ChevronDown,
   ChevronRight,
   Circle,
+  Copy,
   Download,
   Laptop,
   Loader2,
@@ -32,4 +33,5 @@ export const Icons = {
   download: Download,
   loading: Loader2,
   settings: Settings,
+  copy: Copy,
 };

@@ -24,4 +24,21 @@ export const mainNav: MainNavItem[] = [
       },
     ],
   },
+  {
+    title: 'File Tools',
+    items: [
+      {
+        title: 'Files to Base64',
+        href: '/files-to-base64',
+        description: 'Convert files to base64.',
+        items: [],
+      },
+      {
+        title: 'Files from Base64',
+        href: '/files-from-base64',
+        description: 'Make files from base64.',
+        items: [],
+      },
+    ],
+  },
 ];
