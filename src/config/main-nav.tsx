@@ -36,7 +36,7 @@ export const mainNav: MainNavItem[] = [
       {
         title: 'Files from Base64',
         href: '/files-from-base64',
-        description: 'Make files from base64.',
+        description: 'Download files from base64.',
         items: [],
       },
     ],

@@ -1,4 +1,4 @@
 export const siteConfig = {
   name: 'Handy Things',
-  description: 'List of tools and resources that I find useful.',
+  description: 'A one-stop website containing a collection of useful tools.',
 };
