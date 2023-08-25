@@ -17,9 +17,7 @@ export default function CompressImages() {
         title='Compress Images'
         description='Click to upload or drag and drop images here to compress.'
       />
-      <div className='mt-6 space-y-3'>
-        {files?.map((file, index) => <FileItem key={index} name={file.name} size={file.size} />)}
-      </div>
+      <div className='mt-6 space-y-3'>{files?.map((file, index) => <FileItem key={index} file={file} />)}</div>
     </div>
   );
 }

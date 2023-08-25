@@ -15,3 +15,8 @@ export interface NavItemWithOptionalChildren extends NavItem {
 }
 
 export type MainNavItem = NavItemWithOptionalChildren;
+
+export type APIResponse = {
+  data: string;
+  size: number;
+};

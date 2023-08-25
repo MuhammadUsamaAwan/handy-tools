@@ -5,6 +5,7 @@ import {
   Circle,
   Download,
   Laptop,
+  Loader2,
   Menu,
   Moon,
   Search,
@@ -28,4 +29,5 @@ export const Icons = {
   system: Laptop,
   upload: Upload,
   download: Download,
+  loading: Loader2,
 };
