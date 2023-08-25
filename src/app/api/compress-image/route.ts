@@ -1,16 +1,29 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import type { APIResponse } from '@/types';
 import sharp from 'sharp';
+import { ZodError } from 'zod';
+
+import { getImageCompressedOptions } from '@/lib/getImageCompressedOptions';
+import { getImageType } from '@/lib/utils';
 
 export async function POST(request: NextRequest) {
-  const data = await request.formData();
-  const file = data.get('file') as File;
-
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-
   try {
-    const compressedBuffer = await sharp(buffer).jpeg({ mozjpeg: true, quality: 80 }).toBuffer();
+    const formData = await request.formData();
+    const file = formData.get('file') as File | null;
+    if (!file) {
+      return NextResponse.json({ status: 400, error: 'No file provided' });
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const quality = Number(formData.get('quality')) ?? 80;
+
+    const type = getImageType(file);
+
+    const compressedBuffer = await sharp(buffer)
+      [type]({ ...getImageCompressedOptions(type), quality })
+      .toBuffer();
     const isCompressed = compressedBuffer.length < buffer.length;
     const data: APIResponse = {
       data: isCompressed
@@ -20,6 +33,12 @@ export async function POST(request: NextRequest) {
     };
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+    if (error instanceof ZodError) {
+      return NextResponse.json({ status: 400, error: error.issues });
+    }
+    if (error instanceof Error) {
+      return NextResponse.json({ status: 400, error: error.message });
+    }
+    return NextResponse.json({ status: 500, error: 'Internal Server Error' });
   }
 }
