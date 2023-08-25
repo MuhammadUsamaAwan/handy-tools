@@ -65,7 +65,7 @@ export function FileItem({ file, endpoint, options }: FileItemProps) {
       )}
       {data && (
         <a
-          download={file.name}
+          download={data.name}
           href={data.data}
           className={cn(
             buttonVariants({

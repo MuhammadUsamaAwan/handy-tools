@@ -14,7 +14,7 @@ export function SettingsDialog({ children, open, onOpenChange }: SettingsDialogP
         <DialogHeader>
           <DialogTitle>Compress Image Settings</DialogTitle>
         </DialogHeader>
-        <div className='py-2'>{children}</div>
+        <div className='space-y-2 py-3'>{children}</div>
         <DialogFooter>
           <Button size='sm' onClick={() => onOpenChange(false)}>
             Close

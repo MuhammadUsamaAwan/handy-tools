@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { z } from 'zod';
+
+import { imageTypeSchema } from '@/lib/validations';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -24,6 +25,5 @@ export function getPercentage(original: number, modified: number) {
 
 export function getImageType(file: File) {
   const type = file.type.split('/')[1];
-  const imageTypeSchema = z.enum(['png', 'jpeg', 'webp', 'avif', 'gif', 'heif', 'tiff', 'jp2']);
   return imageTypeSchema.parse(type);
 }

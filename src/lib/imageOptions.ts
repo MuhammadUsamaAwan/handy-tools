@@ -8,8 +8,11 @@ import type {
   TiffOptions,
   WebpOptions,
 } from 'sharp';
+import type { z } from 'zod';
 
-export function getImageCompressedOptions(type: 'png' | 'jpeg' | 'webp' | 'avif' | 'gif' | 'heif' | 'tiff' | 'jp2') {
+import type { imageTypeSchema } from '@/lib/validations';
+
+export function getImageOptions(type: z.infer<typeof imageTypeSchema>) {
   switch (type) {
     case 'jpeg': {
       return {

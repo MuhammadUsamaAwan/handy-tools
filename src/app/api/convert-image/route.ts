@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { ZodError } from 'zod';
 
 import { getImageOptions } from '@/lib/imageOptions';
-import { getImageType } from '@/lib/utils';
+import { imageTypeSchema } from '@/lib/validations';
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,19 +18,15 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(arrayBuffer);
 
     const quality = Number(formData.get('quality')) ?? 80;
+    const format = imageTypeSchema.parse(formData.get('format') ?? 'webp');
 
-    const type = getImageType(file);
-
-    const compressedBuffer = await sharp(buffer, { animated: true })
-      [type]({ ...getImageOptions(type), quality })
+    const convetedBuffer = await sharp(buffer, { animated: true })
+      [format]({ ...getImageOptions(format), quality })
       .toBuffer();
-    const isCompressed = compressedBuffer.length < buffer.length;
     const data: APIResponse = {
-      name: file.name,
-      data: isCompressed
-        ? `data:${file.type};base64,${compressedBuffer.toString('base64')}`
-        : `data:${file.type};base64,${buffer.toString('base64')}`,
-      size: isCompressed ? compressedBuffer.length : buffer.length,
+      name: file.name.split('.')[0] + '.' + format,
+      data: `data:${file.type};base64,${convetedBuffer.toString('base64')}`,
+      size: convetedBuffer.length,
     };
     return NextResponse.json(data);
   } catch (error) {
