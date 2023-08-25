@@ -5,7 +5,8 @@ import sharp from 'sharp';
 import { ZodError } from 'zod';
 
 import { getImageOptions } from '@/lib/imageOptions';
-import { imageTypeSchema } from '@/lib/validations';
+import { getImageType } from '@/lib/utils';
+import { imageResizeSchema, imageTypeSchema } from '@/lib/validations';
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,10 +20,17 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(arrayBuffer);
 
     const quality = Number(formData.get('quality')) ?? 80;
-    const format = imageTypeSchema.parse(formData.get('format') ?? 'webp');
+    const format = imageTypeSchema.parse(formData.get('format') ?? getImageType(file));
+    const fit = formData.get('fit');
+    const position = formData.get('position');
+    const width = Number(formData.get('width'));
+    const height = Number(formData.get('height'));
+
+    const imageSize = imageResizeSchema.parse({ width, height, fit, position });
 
     const convetedBuffer = await sharp(buffer, { animated: true })
       [format]({ ...getImageOptions(format), quality })
+      .resize(imageSize)
       .toBuffer();
     const fileType = await fileTypeFromBuffer(convetedBuffer);
     const data: APIResponse = {

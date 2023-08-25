@@ -35,11 +35,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(data);
   } catch (error) {
     if (error instanceof ZodError) {
-      return NextResponse.json({ status: 400, error: error.issues });
+      return NextResponse.json(error.issues, { status: 400 });
     }
     if (error instanceof Error) {
-      return NextResponse.json({ status: 400, error: error.message });
+      return NextResponse.json(error.message, { status: 400 });
     }
-    return NextResponse.json({ status: 500, error: 'Internal Server Error' });
+    return NextResponse.json('Internal Server Error', { status: 500 });
   }
 }

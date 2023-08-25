@@ -11,7 +11,7 @@ import { Icons } from '@/components/icons';
 type FileItemProps = {
   file: File;
   endpoint: string;
-  options?: Record<string, string>;
+  options?: Record<string, string | undefined>;
 };
 
 export function FileItem({ file, endpoint, options }: FileItemProps) {
@@ -27,7 +27,9 @@ export function FileItem({ file, endpoint, options }: FileItemProps) {
 
       if (options) {
         Object.entries(options).forEach(([key, value]) => {
-          formData.append(key, value);
+          if (value) {
+            formData.append(key, value);
+          }
         });
       }
 
